@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TrainerController;
 use App\Http\Controllers\Admin\TrainingController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\RegistrationController;
 use App\Http\Controllers\User\TrainingController as UserTrainingController;
@@ -37,6 +38,10 @@ Route::middleware('auth.user')->group(function () {
     Route::get('logout', [UserAuthController::class, 'logout'])->name('user.logout');
     Route::prefix('trainings')->group(function () {
         Route::get('{id}/checkout', [UserTrainingController::class, 'checkout'])->name('user.checkout_training');
+        Route::post('{id}/order', [OrderController::class, 'placeOrder'])->name('user.order_training');
+    });
+    Route::prefix('orders')->group(function () {
+        Route::get('{id}', [OrderController::class, 'show'])->name('user.detail_order');
     });
 });
 

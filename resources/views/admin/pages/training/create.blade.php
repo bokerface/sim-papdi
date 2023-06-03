@@ -145,6 +145,15 @@
                         </small>
                     </div>
                     <div class="form-group">
+                        <label for="startDate">Early Bird selesai</label>
+                        <input name="earlybird_end" type="date"
+                            class="form-control {{ $errors->has('earlybird_end') ? 'is-invalid' : '' }}"
+                            id="startDate" value="{{ old('earlybird_end') }}">
+                        <small class="invalid-feedback">
+                            {{ $errors->first('earlybird_end') }}
+                        </small>
+                    </div>
+                    <div class="form-group">
                         <label for="NormalPrice">Normal</label>
                         <input name="price_normal" type="text"
                             class="form-control {{ $errors->has('price_normal') ? 'is-invalid' : '' }}"

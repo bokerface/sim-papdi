@@ -15,9 +15,14 @@ return new class extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('fullname')->nullable();
             $table->string('email')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('participants', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

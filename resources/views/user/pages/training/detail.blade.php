@@ -2,12 +2,12 @@
     <div class="col-12">
         <section class="py-5" id="features">
             <div class="container px-5 my-5">
-                <div class="row gx-5 mb-5">
+                <div class="row mb-5">
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <img src="{{ route('training.image').'?q='.$training->image }}"
                             class="rounded img-thumbnail" alt="...">
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <h4 class="mb-3">{{ $training->name }}</h4>
                         <div class="mb-3">
                             <span>Tanggal Mulai</span>
@@ -42,11 +42,11 @@
                     </div>
                 </div>
                 <div class="row mt-5">
-                    <div class="col-8">
+                    <div class="col-lg-8">
                         <h5>Deskripsi</h5>
                         <p>{{ $training->description }}</p>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4">
                         <h6>Pemateri</h6>
                         <p class="text-secondary">Pelatihan akan dibawakan oleh :</p>
                         <div class="row">

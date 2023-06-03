@@ -74,6 +74,22 @@ class TrainingService
         return static::$training;
     }
 
+    public static function trainingPrice()
+    {
+        $training = static::$training;
+
+        // dd($training->earlybird_end);
+        if (time() < $training->earlybird_end) {
+            return $training->price_earlybird;
+        }
+
+        if (time() == $training->start_date) {
+            return $training->price_onsite;
+        }
+
+        return $training->price_normal;
+    }
+
     public static function trainingIndex()
     {
     }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->bigInteger('price_earlybird')->nullable();
             $table->bigInteger('price_normal')->nullable();
             $table->bigInteger('price_onsite')->nullable();
+            $table->date('earlybird_end')->nullable();
             $table->string('place')->nullable();
             $table->enum('type', ['online', 'onsite'])->nullable();
             $table->text('description')->nullable();

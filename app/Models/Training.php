@@ -16,6 +16,7 @@ class Training extends Model
         'start_date',
         'end_date',
         'price_earlybird',
+        'earlybird_end',
         'price_normal',
         'price_onsite',
         'place',

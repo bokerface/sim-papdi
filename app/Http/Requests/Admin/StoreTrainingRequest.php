@@ -36,6 +36,7 @@ class StoreTrainingRequest extends FormRequest
             'quota' => ['required', 'numeric'],
             'trainer_id' => ['required', 'numeric', 'exists:trainers,id'],
             'price_earlybird' => ['required', 'numeric'],
+            'earlybird_end' => ['required', 'date'],
             'price_normal' => ['required', 'numeric'],
             'price_onsite' => ['required', 'numeric'],
         ];
