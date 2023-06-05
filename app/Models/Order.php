@@ -17,4 +17,9 @@ class Order extends Model
         'status_order',
         'transaction_id'
     ];
+
+    public function orderParticipants()
+    {
+        return $this->hasMany(OrderParticipant::class);
+    }
 }

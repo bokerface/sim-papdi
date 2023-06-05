@@ -13,7 +13,7 @@ class OrderController extends Controller
 
     public function show($id)
     {
-
+        OrderService::detailOrder($id);
         $trainingId = Order::find($id)->training_id;
         return view('user.pages.order.detail')
             ->with([

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderPartcipant extends Model
+class OrderParticipant extends Model
 {
     use HasFactory;
 
@@ -15,4 +15,9 @@ class OrderPartcipant extends Model
         'participant_id',
         'order_id'
     ];
+
+    public function participant()
+    {
+        return $this->belongsTo(Participant::class);
+    }
 }

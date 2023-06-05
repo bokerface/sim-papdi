@@ -3,8 +3,9 @@
 namespace App\Services;
 
 use App\Models\Order;
-use App\Models\OrderPartcipant;
+use App\Models\OrderParticipant;
 use App\Models\Participant;
+use App\Models\Training;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +16,7 @@ class OrderService
         DB::transaction(function () use ($request, $userId) {
             $order = Order::create([
                 'training_id' => $request['training_id'],
-                'user_id' => $request['training_id'],
+                'user_id' => $userId,
                 'order_date' => now(),
             ]);
 
@@ -35,12 +36,44 @@ class OrderService
                     ]);
                 }
 
-                OrderPartcipant::create([
+                OrderParticipant::create([
                     'participant_id' => $participant->id,
                     'order_id' => $order->id
                 ]);
             }
             // dd($training_participants);
         });
+    }
+
+    public static function detailOrder($orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        $training = Training::find($order->training_id);
+
+        $trainingPrice = '';
+        if (time() < $training->earlybird_end) {
+            $trainingPrice = $training->price_earlybird;
+        } elseif (time() == $training->start_date) {
+            $trainingPrice = $training->price_onsite;
+        } else {
+            $trainingPrice = $training->price_normal;
+        }
+
+
+
+
+        $participants = [];
+        foreach ($order->orderParticipants()->get() as $data) {
+            $participants[] = [
+                'fullname' => $data->participant->fullname,
+                'email' => $data->participant->email,
+            ];
+        }
+
+
+
+
+        dd($participants);
     }
 }
