@@ -1,6 +1,6 @@
 <x-user.layout>
     <!-- Header-->
-    <header class="bg-dark py-5">
+    {{-- <header class="bg-dark py-5">
         <div class="container px-5">
             <div class="row gx-5 align-items-center justify-content-center">
                 <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header> --}}
     <!-- Features section-->
     <section class="py-5" id="features">
         <div class="container px-5 my-5">

@@ -5,11 +5,11 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TrainerController;
 use App\Http\Controllers\Admin\TrainingController;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\RegistrationController;
 use App\Http\Controllers\User\TrainingController as UserTrainingController;
 use App\Http\Controllers\Users\HomeController;
+use App\Http\Controllers\Users\OrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

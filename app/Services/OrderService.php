@@ -60,8 +60,7 @@ class OrderService
             $trainingPrice = $training->price_normal;
         }
 
-
-
+        $totalPrice = $trainingPrice * $order->orderParticipants()->count();
 
         $participants = [];
         foreach ($order->orderParticipants()->get() as $data) {
@@ -71,9 +70,15 @@ class OrderService
             ];
         }
 
+        $data = [
+            'order' => $order,
+            'training' => $training,
+            'trainingPrice' => $trainingPrice,
+            'numberOfParticipants' => $order->orderParticipants()->count(),
+            'participants' => $participants,
+            'totalPrice' => $totalPrice
+        ];
 
-
-
-        dd($participants);
+        return $data;
     }
 }

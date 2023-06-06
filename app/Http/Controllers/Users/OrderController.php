@@ -1,23 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
 use App\Http\Requests\StoreParticipantRequest;
 use App\Models\Order;
 use App\Models\Training;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
 
     public function show($id)
     {
-        OrderService::detailOrder($id);
-        $trainingId = Order::find($id)->training_id;
+        if (Auth::id() != Order::find($id)->user_id) {
+            abort(403);
+        }
+
         return view('user.pages.order.detail')
             ->with([
-                'training' => Training::find($trainingId)
+                'data' => OrderService::detailOrder($id)
             ]);
     }
 
