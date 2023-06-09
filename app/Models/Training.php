@@ -26,8 +26,10 @@ class Training extends Model
         'image'
     ];
 
-    protected $cast = [
-        'type' => TrainingTypeEnum::class
+    protected $casts = [
+        'type' => TrainingTypeEnum::class,
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
     ];
 
     public function trainers()

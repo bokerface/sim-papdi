@@ -15,12 +15,14 @@ class Order extends Model
         'order_date',
         'payment_date',
         'status_order',
-        'transaction_id'
+        'transaction_id',
     ];
 
     protected $casts = [
         'order_date' => 'date',
     ];
+
+    protected $appends = ['status'];
 
     public function orderParticipants()
     {

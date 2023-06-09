@@ -48,7 +48,8 @@
                                 <div class="card-body">
                                     <h6 class="text-secondary">
                                         Status Pembayaran
-                                        :{{ $data['order']['status_order'] }}
+                                        :
+                                        {{ $data['order']['status_order'] }}
                                     </h6>
                                 </div>
                             </div>

@@ -34,6 +34,12 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
                                     <li><a class="dropdown-item" href="portfolio-overview.html">Profile</a></li>
                                     <li>
+                                        <a class="dropdown-item"
+                                            href="{{ route('user.order_index') }}">
+                                            My Trainings
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item" href="{{ route('user.logout') }}">
                                             Logout
                                         </a>

@@ -11,10 +11,17 @@ use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        return view('user.pages.order.index')
+            ->with([
+                'orders' => OrderService::orderIndex(Auth::id())
+            ]);
+    }
 
     public function show($id)
     {
-        if (Auth::id() != Order::find($id)->user_id) {
+        if (Auth::id() != Order::findOrFail($id)->user_id) {
             abort(403);
         }
 

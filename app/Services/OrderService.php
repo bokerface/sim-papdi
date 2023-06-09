@@ -11,10 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class OrderService
 {
-
-    public static function orderIndex()
+    public static function orderIndex($user_id = null, $request = null)
     {
-        return Order::paginate(10)->withQueryString();
+        return Order::when($user_id != null, function ($q) use ($user_id) {
+            $q->where('user_id', '=', $user_id);
+        })
+            ->paginate(10)
+            ->withQueryString();
     }
 
     public static function createOrder($request, $userId)

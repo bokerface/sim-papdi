@@ -42,6 +42,7 @@ Route::middleware('auth.user')->group(function () {
         Route::post('{id}/order', [OrderController::class, 'placeOrder'])->name('user.order_training');
     });
     Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('user.order_index');
         Route::get('{id}', [OrderController::class, 'show'])->name('user.detail_order');
     });
 });
