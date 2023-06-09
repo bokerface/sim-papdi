@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class OrderService
 {
+
+    public static function orderIndex()
+    {
+        return Order::paginate(10)->withQueryString();
+    }
+
     public static function createOrder($request, $userId)
     {
         DB::transaction(function () use ($request, $userId) {
@@ -26,8 +32,6 @@ class OrderService
 
                 $participant = Participant::where([['user_id', '=', $userId], ['email', '=', $value]])->first();
 
-                // dump($participant);
-
                 if (!$participant) {
                     $participant = Participant::create([
                         'user_id' => $userId,
@@ -41,7 +45,6 @@ class OrderService
                     'order_id' => $order->id
                 ]);
             }
-            // dd($training_participants);
         });
     }
 
@@ -80,5 +83,16 @@ class OrderService
         ];
 
         return $data;
+    }
+
+    public static function confirmOrderPayment($id)
+    {
+        $order = Order::findOrFail($id);
+
+        if ($order->status_order == "") {
+            $order->update([
+                'status_order' => "Lunas"
+            ]);
+        }
     }
 }

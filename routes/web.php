@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\TrainerController;
 use App\Http\Controllers\Admin\TrainingController;
 use App\Http\Controllers\FileController;
@@ -69,6 +70,12 @@ Route::prefix('admin')->group(function () {
             Route::get('trainerByName', [TrainerController::class, 'trainerByName'])->name('admin.get_trainer_by_name');
             Route::get('create', [TrainerController::class, 'create'])->name('admin.create_new_trainer');
             Route::post('create', [TrainerController::class, 'store'])->name('admin.store_new_trainer');
+        });
+
+        Route::prefix('orders')->group(function () {
+            Route::get('/', [AdminOrderController::class, 'index'])->name('admin.order_index');
+            Route::get('{id}', [AdminOrderController::class, 'show'])->name('admin.detail_order');
+            Route::get('{id}/confirm', [AdminOrderController::class, 'confirmPayment'])->name('admin.finish_order');
         });
     });
 });

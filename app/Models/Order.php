@@ -18,8 +18,30 @@ class Order extends Model
         'transaction_id'
     ];
 
+    protected $casts = [
+        'order_date' => 'date',
+    ];
+
     public function orderParticipants()
     {
         return $this->hasMany(OrderParticipant::class);
+    }
+
+    public function training()
+    {
+        return $this->belongsTo(Training::class);
+    }
+
+    public function getStatusAttribute()
+    {
+        if ($this->status_order == "Lunas") {
+            return "Lunas";
+        }
+
+        if (Training::find($this->training_id)->start_date < time()) {
+            return "Expired";
+        }
+
+        return "Pending";
     }
 }
