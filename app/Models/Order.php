@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentMethodEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +13,7 @@ class Order extends Model
 
     protected $fillable = [
         'training_id',
+        'payment_method',
         'user_id',
         'order_date',
         'payment_date',
@@ -19,6 +22,7 @@ class Order extends Model
     ];
 
     protected $casts = [
+        'payment_method' => PaymentMethodEnum::class,
         'order_date' => 'date',
     ];
 
@@ -40,7 +44,7 @@ class Order extends Model
             return "Lunas";
         }
 
-        if (Training::find($this->training_id)->start_date < time()) {
+        if (Carbon::now()->gt(Training::find($this->training_id)->start_date)) {
             return "Expired";
         }
 

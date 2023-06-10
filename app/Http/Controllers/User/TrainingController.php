@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enums\PaymentMethodEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreParticipantRequest;
 use App\Services\TrainingService;
@@ -28,6 +29,7 @@ class TrainingController extends Controller
         $training = TrainingService::getTrainingById($id)->fetch();
         $price = TrainingService::getTrainingById($id)->trainingPrice();
         $totalPrice = $price * $request['q'];
+        // dd();
 
         // dd(TrainingService::getTrainingById($id)->trainingPrice());
         return view('user.pages.training.checkout')
@@ -35,7 +37,8 @@ class TrainingController extends Controller
                 'participant' => $participant,
                 'training' => $training,
                 'price' => $price,
-                'totalPrice' => $totalPrice
+                'totalPrice' => $totalPrice,
+                'paymentMethod' => PaymentMethodEnum::cases()
             ]);
     }
 }

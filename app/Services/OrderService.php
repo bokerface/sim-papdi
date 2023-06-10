@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class OrderService
 {
+
+    public static $order;
+
     public static function orderIndex($user_id = null, $request = null)
     {
         return Order::when($user_id != null, function ($q) use ($user_id) {
@@ -27,6 +30,7 @@ class OrderService
                 'training_id' => $request['training_id'],
                 'user_id' => $userId,
                 'order_date' => now(),
+                'payment_method' => $request['payment_method']
             ]);
 
             $training_participants = Arr::except($request, ['training_id']);
@@ -48,7 +52,10 @@ class OrderService
                     'order_id' => $order->id
                 ]);
             }
+
+            static::$order = $order->id;
         });
+        return static::$order;
     }
 
     public static function detailOrder($orderId)

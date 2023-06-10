@@ -25,15 +25,24 @@ class OrderController extends Controller
             abort(403);
         }
 
-        return view('user.pages.order.detail')
-            ->with([
-                'data' => OrderService::detailOrder($id)
-            ]);
+        $order = OrderService::detailOrder($id);
+
+        if ($order['order']['payment_method']->value == 'Transfer') {
+            return view('user.pages.order.detail')
+                ->with([
+                    'data' => $order
+                ]);
+        }
+
+        if ($order['order']['payment_method']->value == 'Midtrans') {
+            return "Midtrans Payment";
+        }
     }
 
     public function placeOrder(StoreParticipantRequest $request)
     {
         $userId = Auth::id();
-        OrderService::createOrder($request->validated(), $userId);
+        $orderId = OrderService::createOrder($request->validated(), $userId);
+        return redirect()->to(route('user.detail_order', $orderId));
     }
 }

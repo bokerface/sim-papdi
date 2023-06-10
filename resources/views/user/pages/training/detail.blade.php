@@ -44,7 +44,7 @@
                 <div class="row mt-5">
                     <div class="col-lg-8">
                         <h5>Deskripsi</h5>
-                        <p>{{ $training->description }}</p>
+                        <p class="text-break">{{ $training->description }}</p>
                     </div>
                     <div class="col-lg-4">
                         <h6>Pemateri</h6>

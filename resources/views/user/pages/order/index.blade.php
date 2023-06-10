@@ -4,30 +4,30 @@
             <div class="container px-5 my-5">
                 <h4 class="mb-3">Pelatihan Saya</h4>
                 <div class="btn-group mb-3">
-                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    {{-- <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Status Pembayaran
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li>
+                    </button> --}}
+                    {{-- <ul class="dropdown-menu"> --}}
+                    {{-- <li>
                             <a class="dropdown-item"
                                 href="{{ route('user.order_index').'?q=lunas' }}">
-                                Lunas
-                            </a>
-                        </li>
-                        <li>
+                    Lunas
+                    </a>
+                    </li> --}}
+                    {{-- <li>
                             <a class="dropdown-item"
                                 href="{{ route('user.order_index').'?q=pending' }}">
-                                Menunggu Pembayaran
-                            </a>
-                        </li>
-                        <li>
+                    Menunggu Pembayaran
+                    </a>
+                    </li> --}}
+                    {{-- <li>
                             <a class="dropdown-item"
                                 href="{{ route('user.order_index').'?q=expired' }}">
-                                Expired
-                            </a>
-                        </li>
-                    </ul>
+                    Expired
+                    </a>
+                    </li> --}}
+                    {{-- </ul> --}}
                 </div>
                 @foreach($orders as $order)
                     <div class="card mb-3">
