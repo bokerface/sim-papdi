@@ -40,14 +40,7 @@
                                 <span>ID Pendaftaran : {{ $order->id }}</span>
                             </div>
                             <div>
-                                @if($order->status_order == "Lunas")
-                                    <span class="badge bg-success">Lunas</span>
-                                @elseif(
-                                    $order->status_order == "Expired")
-                                    <span class="badge bg-danger">Expired</span>
-                                @else
-                                    <span class="badge bg-warning">Menunggu Pembayaran</span>
-                                @endif
+                                <x-user.order-status :id="$order->id" />
                             </div>
                         </div>
                         <div class="card-body">

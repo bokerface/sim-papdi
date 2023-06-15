@@ -8,6 +8,9 @@ use App\Models\Training;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class OrderController extends Controller
 {
@@ -25,7 +28,7 @@ class OrderController extends Controller
             abort(403);
         }
 
-        $order = OrderService::detailOrder($id);
+        $order = OrderService::detailOrder($id)->fetch();
 
         if ($order['order']['payment_method']->value == 'Transfer') {
             return view('user.pages.order.detail')
@@ -35,7 +38,11 @@ class OrderController extends Controller
         }
 
         if ($order['order']['payment_method']->value == 'Midtrans') {
-            return "Midtrans Payment";
+            return view('user.pages.order.detail-midtrans')
+                ->with([
+                    'data' => $order,
+                    // 'midtransClientKey' => "SB-Mid-client-NUHDTW6uipcvE7sz"
+                ]);
         }
     }
 
@@ -44,5 +51,29 @@ class OrderController extends Controller
         $userId = Auth::id();
         $orderId = OrderService::createOrder($request->validated(), $userId);
         return redirect()->to(route('user.detail_order', $orderId));
+    }
+
+    public function midtransCheckoutProcess($id)
+    {
+        $params = OrderService::detailOrder($id)->checkoutData();
+        try {
+            $paymentUrl = Snap::createTransaction($params)->redirect_url;
+            return redirect()->to($paymentUrl);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function printExampleWarningMessage()
+    {
+        if (strpos(Config::$serverKey, 'your ') != false) {
+            echo "<code>";
+            echo "<h4>Please set your server key from sandbox</h4>";
+            echo "In file: " . __FILE__;
+            echo "<br>";
+            echo "<br>";
+            echo htmlspecialchars('Config::$serverKey = \'<your server key>\';');
+            die();
+        }
     }
 }

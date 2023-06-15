@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->date('order_date')->nullable();
             $table->date('payment_date')->nullable();
+            $table->bigInteger('payment_amount')->nullable();
             $table->string('status_order')->nullable();
             $table->bigInteger('transaction_id')->nullable();
             $table->timestamps();

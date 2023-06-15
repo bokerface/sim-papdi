@@ -19,7 +19,7 @@ class OrderController extends Controller
     {
         return view('admin.pages.order.detail')
             ->with([
-                'data' => OrderService::detailOrder($id)
+                'data' => OrderService::detailOrder($id)->fetch()
             ]);
     }
 
