@@ -24,6 +24,7 @@ class Order extends Model
     protected $casts = [
         'payment_method' => PaymentMethodEnum::class,
         'order_date' => 'date',
+        'payment_date' => 'datetime'
     ];
 
     protected $appends = ['status'];

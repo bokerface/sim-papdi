@@ -6,11 +6,10 @@ use App\Models\Order;
 use App\Models\OrderParticipant;
 use App\Models\Participant;
 use App\Models\Training;
-use Exception;
+use Error;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Midtrans\Config;
-use Midtrans\Snap;
 
 class OrderService
 {
@@ -153,27 +152,23 @@ class OrderService
     {
         $order = static::$order;
 
-        if ($order['order']->status_order == "") {
-            Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
 
-            // Required
-            $transaction_details = array(
-                'order_id' => $order['order']['id'],
-                'gross_amount' => $order['totalPrice'], // no decimal allowed for creditcard
-            );
+        // Required
+        $transaction_details = array(
+            'order_id' => $order['order']['id'],
+            'gross_amount' => $order['totalPrice'], // no decimal allowed for creditcard
+        );
 
-            // Fill SNAP API parameter
-            $params = array(
-                'transaction_details' => $transaction_details,
-                'callbacks' => [
-                    // 'finish' => 'orders/' . $order['order']['order_id']
-                    'finish' => "https://78bb-2001-448a-4049-21b1-a0b1-1efb-6937-e324.ngrok-free.app/" . 'orders/' . $order['order']['order_id']
-                ]
-            );
+        // Fill SNAP API parameter
+        $params = array(
+            'transaction_details' => $transaction_details,
+            'callbacks' => [
+                // 'finish' => 'orders/' . $order['order']['order_id']
+                'finish' => "https://78bb-2001-448a-4049-21b1-a0b1-1efb-6937-e324.ngrok-free.app/" . 'orders/' . $order['order']['order_id']
+            ]
+        );
 
-            return $params;
-        }
-
-        throw new Exception("Tidak bisa melakukan pembayaran.");
+        return $params;
     }
 }

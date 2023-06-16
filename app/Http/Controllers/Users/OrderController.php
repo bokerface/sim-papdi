@@ -8,9 +8,11 @@ use App\Models\Training;
 use App\Services\OrderService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Error;
 use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
+use Throwable;
 
 class OrderController extends Controller
 {
@@ -59,8 +61,8 @@ class OrderController extends Controller
         try {
             $paymentUrl = Snap::createTransaction($params)->redirect_url;
             return redirect()->to($paymentUrl);
-        } catch (\Exception $e) {
-            echo $e->getMessage();
+        } catch (Throwable $e) {
+            return redirect()->back()->with('error', 'Tidak bisa melakukan pembayaran.');
         }
     }
 

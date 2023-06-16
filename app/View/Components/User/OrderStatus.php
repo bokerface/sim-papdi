@@ -23,18 +23,21 @@ class OrderStatus extends Component
             if ($order->status_order == 'success') {
                 $this->status = 'Success';
                 $this->statusClass = 'bg-success';
-            } elseif ($order->status_order =  'settlement') {
+            } elseif ($order->status_order ==  'settlement') {
                 $this->status = 'Settlement';
                 $this->statusClass = 'bg-success';
-            } elseif ($order->status_order = 'pending') {
+            } elseif ($order->status_order == 'pending') {
                 $this->status = 'Pending';
                 $this->statusClass = 'bg-info';
-            } elseif ($order->status_order = 'denied') {
+            } elseif ($order->status_order == 'denied') {
                 $this->status = 'Denied';
                 $this->statusClass = 'bg-danger';
-            } else {
+            } elseif ($order->status_order == 'expired') {
                 $this->status = 'Expired';
                 $this->statusClass = 'bg-warning';
+            } else {
+                $this->status = 'Menunggu Pembayaran';
+                $this->statusClass = 'bg-secondary';
             }
         } else {
             if ($order->status == 'Lunas') {

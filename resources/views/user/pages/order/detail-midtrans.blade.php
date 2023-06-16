@@ -61,13 +61,29 @@
                                     </h6>
                                 </div>
                             </div>
-                            <form
-                                action="{{ route('user.pay_order',$data['order']['id']) }}"
-                                method="GET">
-                                <div class="d-grid gap-2 mt-3">
-                                    <button class="btn btn-primary" type="submit">Bayar</button>
+                            @if(
+                                $data['order']['status_order'] != '')
+                                <h5 class="mt-3"><b>Tanggal Pembayaran</b></h5>
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="text-secondary">
+                                            {{ $data['order']['payment_date']->isoFormat("D MMMM Y, H:mm") }}
+                                        </h6>
+                                    </div>
                                 </div>
-                            </form>
+                            @endif
+
+                            @if(
+                                $data['order']['status_order'] == '')
+                                <form
+                                    action="{{ route('user.pay_order',$data['order']['id']) }}"
+                                    method="GET">
+                                    <div class="d-grid gap-2 mt-3">
+                                        <button class="btn btn-primary" type="submit">Bayar</button>
+                                    </div>
+                                </form>
+                            @endif
+
                         </div>
                     </div>
                 </div>
