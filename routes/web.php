@@ -32,6 +32,12 @@ Route::post('login', [UserAuthController::class, 'authenticate'])->name('user.lo
 Route::get('signup', [RegistrationController::class, 'form'])->name('user.registration_form');
 Route::post('signup', [RegistrationController::class, 'register'])->name('user.submit_registration');
 
+Route::get('forgot-password', [UserAuthController::class, 'askResetPasswordForm'])->name('user.ask_reset_password_form');
+Route::post('forgot-password', [UserAuthController::class, 'sendResetPasswordForm'])->name('user.send_reset_password_form');
+
+Route::get('reset-password', [UserAuthController::class, 'resetPasswordForm'])->name('user.reset_password_form');
+Route::post('reset-password', [UserAuthController::class, 'resetPasswordAttempt'])->name('user.reset_password_attempt');
+
 Route::get('t_image', [FileController::class, 'trainingBanner'])->name('training.image');
 
 Route::get('trainings/{id}', [UserTrainingController::class, 'show'])->name('user.training_detail');
