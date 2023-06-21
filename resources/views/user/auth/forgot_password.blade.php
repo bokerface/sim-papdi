@@ -2,11 +2,18 @@
     <section class="py-5" id="features">
         <div class="container px-5 my-5 d-flex justify-content-center">
             <div class="col-5">
-                <h4 class="card-title">
+                <h4>
                     Lupa Password
                 </h4>
+
                 <form action="{{ route('user.send_reset_password_form') }}" method="POST"
                     class="mt-5">
+                    @if(session()->has('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+
                     @error('login_failed')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}
