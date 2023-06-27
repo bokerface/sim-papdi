@@ -49,15 +49,7 @@
                                     <h6 class="text-secondary">
                                         Status Pembayaran
                                         :
-                                        @if(
-                                            $data['order']['status'] == "Lunas")
-                                            <span class="badge bg-success">Lunas</span>
-                                        @elseif(
-                                            $data['order']['status'] == "Expired")
-                                            <span class="badge bg-danger">Expired</span>
-                                        @else
-                                            <span class="badge bg-warning">Menunggu Pembayaran</span>
-                                        @endif
+                                        <x-user.order-status :id="$data['order']['id']" />
                                     </h6>
                                 </div>
                             </div>

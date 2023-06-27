@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CertificateController as AdminCertificateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\TrainerController;
 use App\Http\Controllers\Admin\TrainingController;
+use App\Http\Controllers\Users\CertificateController;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\Midtrans\NotificationController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\RegistrationController;
 use App\Http\Controllers\User\TrainingController as UserTrainingController;
@@ -53,6 +54,11 @@ Route::middleware('auth.user')->group(function () {
         Route::get('{id}', [OrderController::class, 'show'])->name('user.detail_order');
         Route::get('{id}/pay-order', [OrderController::class, 'midtransCheckoutProcess'])->name('user.pay_order');
     });
+    Route::prefix('certificates')->group(function () {
+        Route::get('/', [CertificateController::class, 'index'])->name('user.certificate_index');
+        Route::get('{id}', [CertificateController::class, 'show'])->name('user.preview_certificate');
+        Route::get('{id}/download', [CertificateController::class, 'show'])->name('user.download_certificate');
+    });
 });
 
 // Admin Routes
@@ -85,6 +91,13 @@ Route::prefix('admin')->group(function () {
             Route::get('/', [AdminOrderController::class, 'index'])->name('admin.order_index');
             Route::get('{id}', [AdminOrderController::class, 'show'])->name('admin.detail_order');
             Route::get('{id}/confirm', [AdminOrderController::class, 'confirmPayment'])->name('admin.finish_order');
+        });
+
+        Route::prefix('cerificates')->group(function () {
+            Route::get('/', [AdminCertificateController::class, 'index'])->name('admin.certificate_index');
+            Route::get('settings', [AdminCertificateController::class, 'settingIndex'])->name('admin.certificate_setting_index');
+            Route::get('settings/{id}', [AdminCertificateController::class, 'settingDetail'])->name('admin.certificate_setting_detail');
+            Route::post('settings/{id}/preview', [AdminCertificateController::class, 'preview'])->name('admin.certificate_setting_preview');
         });
     });
 });

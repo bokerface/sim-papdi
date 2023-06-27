@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->enum('payment_method', ['BankTransfer', 'Midtrans'])->nullable();
+            $table->enum('payment_method', ['Transfer', 'Midtrans'])->nullable();
             $table->unsignedBigInteger('training_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->date('order_date')->nullable();

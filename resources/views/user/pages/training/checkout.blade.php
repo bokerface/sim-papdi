@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <select class="form-select form-select-sm mt-2" name="payment_method">
-                            <option>Methode Pembayaran</option>
+                            <option>Metode Pembayaran</option>
                             @foreach($paymentMethod as $method)
                                 <option value="{{ $method->name }}">{{ $method->value }}</option>
                             @endforeach

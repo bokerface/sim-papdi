@@ -22,24 +22,38 @@
     <hr class="sidebar-divider">
 
     <!-- Heading -->
-    {{-- <div class="sidebar-heading">
-        Interface
-    </div> --}}
+    <div class="sidebar-heading">
+        Pelatihan
+    </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.training_index') }}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Trainings</span></a>
+            <span>Pelatihan</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.order_index') }}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Training Order</span></a>
+            <span>Pembayaran Pelatihan</span></a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+
+    {{-- <div class="sidebar-heading">
+        Pengaturan
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.certificate_setting_index') }}">
+    <i class="fas fa-fw fa-chart-area"></i>
+    <span>Pengaturan Sertifikat</span>
+    </a>
+    </li> --}}
+
+    {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

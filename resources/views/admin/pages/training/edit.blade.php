@@ -21,9 +21,9 @@
         <div class="col-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-3">Training Detail</h4>
+                    <h4 class="mb-3">Detail Training</h4>
                     <div class="form-group">
-                        <label for="trainingName">Training Name</label>
+                        <label for="trainingName">Nama Training</label>
                         <input name="name" type="text"
                             class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                             id="trainingName" aria-describedby="name" value="{{ $training->name }}">
@@ -41,7 +41,7 @@
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="trainingDescription">Description</label>
+                        <label for="trainingDescription">Deskripsi</label>
                         <textarea name="description"
                             class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}"
                             id="trainingDescription" rows="3">{{ $training->description }}</textarea>
@@ -50,7 +50,7 @@
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="trainingPlace">Place</label>
+                        <label for="trainingPlace">Tempat</label>
                         <input name="place" type="text"
                             class="form-control {{ $errors->has('place') ? 'is-invalid' : '' }}"
                             id="trainingPlace" aria-describedby="place" value="{{ $training->place }}">
@@ -59,14 +59,14 @@
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="trainingType">Type</label>
+                        <label for="trainingType">Tipe Training</label>
                         <select name="type"
                             class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}"
                             id="">
-                            <option value="">training type</option>
+                            <option value="">tipe training</option>
                             @foreach($types as $type)
                                 <option value="{{ $type->value }}"
-                                    {{ $training->type == $type->value ? 'selected' : '' }}>
+                                    {{ $training->type->value == $type->value ? 'selected' : '' }}>
                                     {{ $type->value }}
                                 </option>
                             @endforeach
@@ -76,7 +76,7 @@
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="trainingQuota">Quota</label>
+                        <label for="trainingQuota">Kuota</label>
                         <input name="quota" type="number"
                             class="form-control {{ $errors->has('quota') ? 'is-invalid' : '' }}"
                             id="trainingQuota" aria-describedby="quota" value="{{ $training->quota }}">
@@ -90,7 +90,7 @@
         <div class="col-4">
             <div class="card mb-3">
                 <div class="card-body">
-                    <h4 class="mb-3">Date</h4>
+                    <h4 class="mb-3">Tanggal</h4>
                     <div class="form-group">
                         <label for="startDate">Start Date</label>
                         <input name="start_date" type="datetime-local"
@@ -115,7 +115,7 @@
                 <div class="card-body">
                     <h4 class="mb-3">Trainer</h4>
                     <div class="form-group">
-                        <label for="trainerName">Search by trainer name</label>
+                        <label for="trainerName">Cari berdasarkan nama pemateri</label>
                         <select class="js-example-basic-single form-control" name="trainer_id">
                         </select>
                         @error('trainer_id')
@@ -130,7 +130,7 @@
         <div class="col-4">
             <div class="card mb-3">
                 <div class="card-body">
-                    <h4 class="mb-3">Pricing</h4>
+                    <h4 class="mb-3">Harga</h4>
                     <div class="form-group">
                         <label for="earlyBirdPrice">Early Bird</label>
                         <input name="price_earlybird" type="number"
@@ -171,7 +171,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-success btn-block">Save</button>
+            <button class="btn btn-success btn-block">Simpan</button>
         </div>
     </form>
 

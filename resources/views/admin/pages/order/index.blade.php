@@ -8,7 +8,7 @@
         </div>
     </x-slot:title>
 
-    <div class="mb-3">
+    {{-- <div class="mb-3">
         <div class="btn-group">
             <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"
                 aria-expanded="false">
@@ -20,7 +20,7 @@
                 <a class="dropdown-item" href="#">Expired</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     @foreach($orders as $order)
         <div class="card mb-2">

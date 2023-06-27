@@ -62,7 +62,7 @@
                         <select name="type"
                             class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}"
                             id="">
-                            <option value="">training type</option>
+                            <option value="">tipe training</option>
                             @foreach($types as $type)
                                 <option value="{{ $type->value }}"
                                     {{ old('type') == $type->value ? 'selected' : '' }}>

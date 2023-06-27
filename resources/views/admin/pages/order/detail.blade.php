@@ -94,6 +94,10 @@
                                     </div>
                                 </div>
                             @endif
+                            <a href="{{ route('admin.certificate_setting_detail',$data['order']['id']) }}"
+                                class="btn btn-block btn-primary mt-3">
+                                Sertifikat
+                            </a>
                         </div>
                     </div>
                 </div>

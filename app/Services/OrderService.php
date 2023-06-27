@@ -171,4 +171,8 @@ class OrderService
 
         return $params;
     }
+
+    public static function orderCertificate($id)
+    {
+    }
 }
