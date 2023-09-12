@@ -9,6 +9,12 @@
         </div>
     </x-slot:title>
 
+    @if(session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
     @foreach($trainings as $training)
         <div class="card mb-2">
             <div class="card-body">
@@ -28,6 +34,14 @@
                         <p>
                             {{ $training->description }}
                         </p>
+                        <a href="{{ route('admin.training_participant',$training->id) }}"
+                            class="btn btn-primary btn-sm">
+                            Peserta
+                        </a>
+                        <a href="{{ route('admin.certificate_settings',$training->id) }}"
+                            class="btn btn-warning btn-sm">
+                            Pengaturan Sertifikat
+                        </a>
                     </div>
                 </div>
             </div>

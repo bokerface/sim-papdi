@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\TrainerController;
 use App\Http\Controllers\Admin\TrainingController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Users\CertificateController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
@@ -43,6 +44,10 @@ Route::get('t_image', [FileController::class, 'trainingBanner'])->name('training
 
 Route::get('trainings/{id}', [UserTrainingController::class, 'show'])->name('user.training_detail');
 
+Route::get('certificate/{training_id}/{participant_email}', [CertificateController::class, 'download'])->name('user.download_certificate');
+
+Route::get('certificate-background', [FileController::class, 'certificateBackground'])->name('uni.certificate_background_image');
+
 Route::middleware('auth.user')->group(function () {
     Route::get('logout', [UserAuthController::class, 'logout'])->name('user.logout');
     Route::prefix('trainings')->group(function () {
@@ -54,11 +59,11 @@ Route::middleware('auth.user')->group(function () {
         Route::get('{id}', [OrderController::class, 'show'])->name('user.detail_order');
         Route::get('{id}/pay-order', [OrderController::class, 'midtransCheckoutProcess'])->name('user.pay_order');
     });
-    Route::prefix('certificates')->group(function () {
-        Route::get('/', [CertificateController::class, 'index'])->name('user.certificate_index');
-        Route::get('{id}', [CertificateController::class, 'show'])->name('user.preview_certificate');
-        Route::get('{id}/download', [CertificateController::class, 'show'])->name('user.download_certificate');
-    });
+    // Route::prefix('certificates')->group(function () {
+    //     Route::get('/', [CertificateController::class, 'index'])->name('user.certificate_index');
+    //     Route::get('{id}', [CertificateController::class, 'show'])->name('user.preview_certificate');
+    //     Route::get('{id}/download', [CertificateController::class, 'show'])->name('user.download_certificate');
+    // });
 });
 
 // Admin Routes
@@ -78,6 +83,12 @@ Route::prefix('admin')->group(function () {
             Route::post('create', [TrainingController::class, 'store'])->name('admin.store_new_training');
             Route::get('{id}', [TrainingController::class, 'edit'])->name('admin.edit_training');
             Route::put('{id}', [TrainingController::class, 'update'])->name('admin.update_training');
+            Route::get('{id}/participant', [TrainingController::class, 'participantIndex'])->name('admin.training_participant');
+            Route::get('{id}/participant/create', [TrainingController::class, 'addParticipant'])->name('admin.add_training_participant');
+            Route::post('{id}/participant/store', [TrainingController::class, 'storeParticipant'])->name('admin.store_training_participant');
+            Route::delete('{id}/participant/{participant_id}/delete', [TrainingController::class, 'deleteTrainingParticipant'])->name('admin.delete_training_participant');
+            Route::get('{id}/certificate-settings', [AdminCertificateController::class, 'certificateSettings'])->name('admin.certificate_settings');
+            Route::post('{id}/certificate-settings', [AdminCertificateController::class, 'storeCertificateSettings'])->name('admin.store_certificate_settings');
         });
 
         Route::prefix('trainers')->group(function () {
@@ -85,6 +96,12 @@ Route::prefix('admin')->group(function () {
             Route::get('trainerByName', [TrainerController::class, 'trainerByName'])->name('admin.get_trainer_by_name');
             Route::get('create', [TrainerController::class, 'create'])->name('admin.create_new_trainer');
             Route::post('create', [TrainerController::class, 'store'])->name('admin.store_new_trainer');
+        });
+
+        Route::prefix('categories')->group(function () {
+            Route::get('categoryByName', [CategoryController::class, 'categoryByName'])->name('admin.get_category_by_name');
+            Route::get('create', [CategoryController::class, 'create'])->name('admin.create_new_category');
+            Route::post('create', [CategoryController::class, 'store'])->name('admin.store_new_category');
         });
 
         Route::prefix('orders')->group(function () {

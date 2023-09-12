@@ -12,6 +12,7 @@ class Training extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'category_id',
         'name',
         'start_date',
         'end_date',

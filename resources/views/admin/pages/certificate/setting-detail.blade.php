@@ -12,7 +12,10 @@
     <div class="col-6 mx-auto">
         <div class="card mb-3">
             <div class="card-body">
-                <form>
+                <form target="_blank" enctype="multipart/form-data"
+                    action="{{ route('admin.certificate_setting_preview',$order->id) }}"
+                    method="POST">
+                    @csrf
                     <div class="form-group">
                         <label>Background</label>
                         <input type="file" class="form-control" name="background" id="background">
@@ -23,9 +26,9 @@
                             <option value="a">asdasd</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block mb-2">Terbitkan</button>
+                    <button type="submit" class="btn btn-primary btn-block mb-2">Preview</button>
                 </form>
-                <button class="btn btn-warning btn-block" id="previewCert">Preview</button>
+                {{-- <button class="btn btn-warning btn-block" id="previewCert">Preview</button> --}}
             </div>
         </div>
     </div>

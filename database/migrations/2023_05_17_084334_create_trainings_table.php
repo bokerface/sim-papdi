@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('name')->nullable();
             $table->text('image')->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
+            $table->enum('cost', ['paid', 'free'])->nullable();
             $table->bigInteger('price_earlybird')->nullable();
             $table->bigInteger('price_normal')->nullable();
             $table->bigInteger('price_onsite')->nullable();
@@ -28,6 +30,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->bigInteger('quota')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('trainings', function (Blueprint $table) {
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

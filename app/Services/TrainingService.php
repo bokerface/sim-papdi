@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Training;
 use App\Models\TrainingTrainer;
+use App\Models\UrgentParticipant;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,8 +17,9 @@ class TrainingService
     public static function storeTraining($request)
     {
         DB::transaction(function () use ($request) {
-            $training = Training::create(Arr::except($request, ['trainer_id', 'image']));
 
+            // dd($request);
+            $training = Training::create(Arr::except($request, ['trainer_id', 'image']));
             $file = $request['image'];
             $fileName = $file->getClientOriginalName();
             $fileLocation = 'trainings/training_banner' . '/' . $training['id'] . '/';
@@ -88,6 +90,20 @@ class TrainingService
         }
 
         return $training->price_normal;
+    }
+
+    public static function storeUrgentTrainingParticipant($request)
+    {
+        DB::transaction(function () use ($request) {
+            UrgentParticipant::create($request);
+        });
+    }
+
+    public static function deleteUrgentTrainingParticipant($participant_id)
+    {
+        DB::transaction(function () use ($participant_id) {
+            UrgentParticipant::find($participant_id)->delete();
+        });
     }
 
     public static function trainingIndex()

@@ -110,12 +110,12 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body">
                     <h4 class="mb-3">Pemateri</h4>
                     <div class="form-group">
                         <label for="trainerName">Cari berdasarkan nama pemateri</label>
-                        <select class="js-example-basic-single form-control" name="trainer_id">
+                        <select class="form-control" name="trainer_id" id="select_trainer">
                         </select>
                         @error('trainer_id')
                             <small class="text-danger">
@@ -130,9 +130,30 @@
                     </a>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3">Kategori</h4>
+                    <div class="form-group">
+                        <label for="categoryName">Cari berdasarkan nama kategori</label>
+                        <select class="form-control" name="category_id" id="select_category">
+                        </select>
+                        @error('category_id')
+                            <small class="text-danger">
+                                {{ $errors->first('category_id') }}
+                            </small>
+                        @enderror
+                    </div>
+                    <p>atau</p>
+                    <a href="{{ route('admin.create_new_category') }}" target="_blank"
+                        class="btn btn-primary">
+                        Tambah kategori baru
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="col-4">
-            <div class="card mb-3">
+
+            <div class="card mb-3" id="price-card">
                 <div class="card-body">
                     <h4 class="mb-3">Harga</h4>
                     <div class="form-group">
@@ -182,7 +203,7 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script>
             $(document).ready(function () {
-                $('.js-example-basic-single').select2({
+                $('#select_trainer').select2({
                     theme: "bootstrap",
                     ajax: {
                         url: "{{ route('admin.get_trainer_by_name') }}",
@@ -205,12 +226,76 @@
             });
 
         </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#select_category').select2({
+                    theme: "bootstrap",
+                    ajax: {
+                        url: "{{ route('admin.get_trainer_by_name') }}",
+                        dataType: 'json',
+                        delay: 250,
+                        processResults: function (data) {
+                            console.log(data);
+                            return {
+                                results: $.map(data, function (item) {
+                                    return {
+                                        text: item.name,
+                                        id: item.id
+                                    }
+                                })
+                            };
+                        },
+                        cache: true
+                    }
+                });
+            });
+
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#select_category').select2({
+                    theme: "bootstrap",
+                    ajax: {
+                        url: "{{ route('admin.get_category_by_name') }}",
+                        dataType: 'json',
+                        delay: 250,
+                        processResults: function (data) {
+                            console.log(data);
+                            return {
+                                results: $.map(data, function (item) {
+                                    return {
+                                        text: item.name,
+                                        id: item.id
+                                    }
+                                })
+                            };
+                        },
+                        cache: true
+                    }
+                });
+            });
+
+        </script>
+
         @if(old('trainer_id')!=null)
             <script>
                 const trainer_id = "{{ old('trainer_id') }}";
                 const trainer_name =
                     "{{ App\Models\Trainer::find(old('trainer_id'))->name }}";
-                $(".js-example-basic-single").html('<option value="' + trainer_id + '" selected>' + trainer_name +
+                $("#select_trainer").html('<option value="' + trainer_id + '" selected>' + trainer_name +
+                    '</option>');
+
+            </script>
+        @endif
+
+        @if(old('category_id')!=null)
+            <script>
+                const category_id = "{{ old('category_id') }}";
+                const category_name =
+                    "{{ App\Models\Category::find(old('category_id'))->name }}";
+                $("#select_category").html('<option value="' + category_id + '" selected>' + category_name +
                     '</option>');
 
             </script>
