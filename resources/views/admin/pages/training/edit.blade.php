@@ -153,7 +153,7 @@
                         <label for="NormalPrice">Normal</label>
                         <input name="price_normal" type="number"
                             class="form-control {{ $errors->has('price_normal') ? 'is-invalid' : '' }}"
-                            id="NormalPrice" aria-describedby="normalPrice" value="{{ $training->price_earlybird }}">
+                            id="NormalPrice" aria-describedby="normalPrice" value="{{ $training->price_normal }}">
                         <small class="invalid-feedback">
                             {{ $errors->first('price_normal') }}
                         </small>
@@ -162,8 +162,7 @@
                         <label for="studentPrice">Onsite</label>
                         <input name="price_onsite" type="number"
                             class="form-control {{ $errors->has('price_onsite') ? 'is-invalid' : '' }}"
-                            id="studentPrice" aria-describedby="studentPrice"
-                            value="{{ $training->price_earlybird }}">
+                            id="studentPrice" aria-describedby="studentPrice" value="{{ $training->price_onsite }}">
                         <small class="invalid-feedback">
                             {{ $errors->first('price_onsite') }}
                         </small>

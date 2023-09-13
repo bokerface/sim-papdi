@@ -48,17 +48,19 @@ class TrainingService
 
             $training->update(Arr::except($request, 'trainer_id'));
 
-            $file = $request['image'];
-            $fileName = $file->getClientOriginalName();
-            $fileLocation = 'trainings/training_banner' . '/' . $training['id'] . '/';
-            Storage::putFileAs($fileLocation, $file, $fileName);
-            $training->update([
-                'image' => $fileLocation . $fileName
-            ]);
+            if (array_key_exists('image', $request)) {
+                $file = $request['image'];
+                $fileName = $file->getClientOriginalName();
+                $fileLocation = 'trainings/training_banner' . '/' . $training['id'] . '/';
+                Storage::putFileAs($fileLocation, $file, $fileName);
+                $training->update([
+                    'image' => $fileLocation . $fileName
+                ]);
 
-            $training->update([
-                'image' => $fileLocation . $fileName
-            ]);
+                // $training->update([
+                //     'image' => $fileLocation . $fileName
+                // ]);
+            }
 
             $training_trainer = TrainingTrainer::where([
                 ['training_id', '=', $training->id],

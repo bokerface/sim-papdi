@@ -28,7 +28,7 @@ class UpdateTrainingRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'image' =>  ['required', 'image', 'mimes:jpg,png', 'max:512'],
+            'image' =>  ['nullable', 'image', 'mimes:jpg,png', 'max:512'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date', 'after:start_date'],
             'place' => ['required', 'string'],
