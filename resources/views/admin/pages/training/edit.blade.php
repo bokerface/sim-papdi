@@ -14,6 +14,12 @@
         </div>
     </x-slot:title>
 
+    @if(session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
     <form class="row mb-3" action="{{ route('admin.update_training',$training->id) }}"
         method="POST" enctype="multipart/form-data">
         @method('PUT')

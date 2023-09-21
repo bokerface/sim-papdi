@@ -51,7 +51,7 @@ class TrainingController extends Controller
     public function update(UpdateTrainingRequest $request, $id): RedirectResponse
     {
         TrainingService::getTrainingById($id)->updateTraining($request->validated());
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Perubahan berhasil disimpan');
     }
 
     public function participantIndex($id)
