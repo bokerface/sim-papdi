@@ -19,7 +19,6 @@ class TrainingController extends Controller
     public function index(): View
     {
         $trainings = Training::all();
-
         return view('admin.pages.training.index')
             ->with(compact('trainings'));
     }

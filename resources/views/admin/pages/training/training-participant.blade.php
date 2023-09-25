@@ -14,6 +14,11 @@
             {{ session()->get('success') }}
         </div>
     @endif
+    @if(session()->has('error'))
+        <div class="alert alert-warning" role="alert">
+            {{ session()->get('error') }}
+        </div>
+    @endif
 
     @foreach($participants as $participant)
         <div class="card mb-2">

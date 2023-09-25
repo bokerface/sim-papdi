@@ -11,6 +11,7 @@ use App\Http\Controllers\Users\CertificateController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\RegistrationController;
+use App\Http\Controllers\User\SelectCertificateController;
 use App\Http\Controllers\User\TrainingController as UserTrainingController;
 use App\Http\Controllers\Users\HomeController;
 use App\Http\Controllers\Users\OrderController;
@@ -29,6 +30,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('user.homepage');
+Route::get('certificate', [SelectCertificateController::class, 'index'])->name('user.check_certificate');
+Route::get('check-certificate', [SelectCertificateController::class, 'checkCertificate'])->name('user.select_certificate');
 Route::get('login', [UserAuthController::class, 'form'])->name('user.login_form');
 Route::post('login', [UserAuthController::class, 'authenticate'])->name('user.login_attempt');
 Route::get('signup', [RegistrationController::class, 'form'])->name('user.registration_form');
@@ -48,23 +51,23 @@ Route::get('certificate/{training_id}/{participant_email}', [CertificateControll
 
 Route::get('certificate-background', [FileController::class, 'certificateBackground'])->name('uni.certificate_background_image');
 
-Route::middleware('auth.user')->group(function () {
-    Route::get('logout', [UserAuthController::class, 'logout'])->name('user.logout');
-    Route::prefix('trainings')->group(function () {
-        Route::get('{id}/checkout', [UserTrainingController::class, 'checkout'])->name('user.checkout_training');
-        Route::post('{id}/order', [OrderController::class, 'placeOrder'])->name('user.order_training');
-    });
-    Route::prefix('orders')->group(function () {
-        Route::get('/', [OrderController::class, 'index'])->name('user.order_index');
-        Route::get('{id}', [OrderController::class, 'show'])->name('user.detail_order');
-        Route::get('{id}/pay-order', [OrderController::class, 'midtransCheckoutProcess'])->name('user.pay_order');
-    });
-    // Route::prefix('certificates')->group(function () {
-    //     Route::get('/', [CertificateController::class, 'index'])->name('user.certificate_index');
-    //     Route::get('{id}', [CertificateController::class, 'show'])->name('user.preview_certificate');
-    //     Route::get('{id}/download', [CertificateController::class, 'show'])->name('user.download_certificate');
-    // });
-});
+// Route::middleware('auth.user')->group(function () {
+//     Route::get('logout', [UserAuthController::class, 'logout'])->name('user.logout');
+//     Route::prefix('trainings')->group(function () {
+//         Route::get('{id}/checkout', [UserTrainingController::class, 'checkout'])->name('user.checkout_training');
+//         Route::post('{id}/order', [OrderController::class, 'placeOrder'])->name('user.order_training');
+//     });
+//     Route::prefix('orders')->group(function () {
+//         Route::get('/', [OrderController::class, 'index'])->name('user.order_index');
+//         Route::get('{id}', [OrderController::class, 'show'])->name('user.detail_order');
+//         Route::get('{id}/pay-order', [OrderController::class, 'midtransCheckoutProcess'])->name('user.pay_order');
+//     });
+//     // Route::prefix('certificates')->group(function () {
+//     //     Route::get('/', [CertificateController::class, 'index'])->name('user.certificate_index');
+//     //     Route::get('{id}', [CertificateController::class, 'show'])->name('user.preview_certificate');
+//     //     Route::get('{id}/download', [CertificateController::class, 'show'])->name('user.download_certificate');
+//     // });
+// });
 
 // Admin Routes
 

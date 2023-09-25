@@ -41,7 +41,7 @@ class CertificateController extends Controller
         $filePath = CertificateSetting::where('training_id', '=', $training->id)->firstOrFail()->file;
 
         if ($filePath == null) {
-            abort(404);
+            return redirect()->back()->with('error', 'Sertifikat belum selesai dibuat.');
         }
 
         $background = route('uni.certificate_background_image') . '?q=' . $filePath;

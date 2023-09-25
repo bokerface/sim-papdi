@@ -61,7 +61,7 @@
 <body>
     <div class="container">
         <div class="logo">
-            Papdi Purwokerto
+            Papdi Purwokertos
         </div>
 
         <div class="marquee">

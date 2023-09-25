@@ -4,7 +4,7 @@
             <h1 class="h3 mb-0 text-gray-800">Trainings</h1>
             <a href="{{ route('admin.create_new_training') }}"
                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-plus fa-sm text-white-50"></i> New Training
+                <i class="fas fa-plus fa-sm text-white-50"></i> Pelatihan Baru
             </a>
         </div>
     </x-slot:title>
@@ -20,8 +20,14 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-2 mr-3">
-                        <img src="{{ route('training.image').'?q='.$training->image }}"
-                            width="200" alt="">
+                        @if($training->certificateSetting->file == null)
+                            <img src="{{ route('training.image').'?q='.$training->image }}"
+                                width="200" alt="">
+                        @else
+                            <img src="{{ route('uni.certificate_background_image') . '?q=' . $training->certificateSetting->file }}"
+                                width="200" alt="">
+                        @endif
+
                     </div>
                     <div class="col-8">
                         <div class="mb-2">

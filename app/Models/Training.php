@@ -44,4 +44,9 @@ class Training extends Model
             get: fn ($value) => Crypt::encryptString($value)
         );
     }
+
+    public function certificateSetting()
+    {
+        return $this->hasOne(CertificateSetting::class);
+    }
 }

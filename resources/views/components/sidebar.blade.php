@@ -32,11 +32,11 @@
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Pelatihan</span></a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.order_index') }}">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Pembayaran Pelatihan</span></a>
-    </li>
+    <i class="fas fa-fw fa-chart-area"></i>
+    <span>Pembayaran Pelatihan</span></a>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

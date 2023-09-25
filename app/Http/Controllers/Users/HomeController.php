@@ -11,6 +11,7 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        return redirect()->to(route('admin.dashboard'));
         $trainings = Training::when($request->has('category'), function ($query) use ($request) {
             $query->where('category_id', '=', $request->category);
         })->get();

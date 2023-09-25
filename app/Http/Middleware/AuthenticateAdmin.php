@@ -18,11 +18,11 @@ class AuthenticateAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role_id === Role::IS_USER) {
+        if (Auth::check() && Auth::user()->role_id == Role::IS_USER) {
             abort(401);
         }
 
-        if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role_id === Role::IS_ADMIN) {
+        if (Auth::guard('admin')->check() && Auth::guard('admin')->user()->role_id == Role::IS_ADMIN) {
             return $next($request);
         }
 

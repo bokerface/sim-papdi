@@ -16,6 +16,11 @@ class CertificateSetting extends Model
         'file',
     ];
 
+    public function training()
+    {
+        return $this->hasOne(Training::class);
+    }
+
     protected function file(): Attribute
     {
         return Attribute::make(
